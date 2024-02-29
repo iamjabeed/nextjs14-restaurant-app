@@ -9,20 +9,22 @@ import Footer from "../_components/Footer";
 const page = () => {
   const [login, setLogin] = useState(true);
   return (
-    <section>
+    <section className="">
       <div>
         <RestaurantHeader />
 
-        <div>
-          <h2>Login/signup page</h2>
-          {login ? <RestaurantLogin /> : <RestaurantSignUp />}
-        </div>
-        <div>
-          <button onClick={() => setLogin(!login)}>
-            {login
-              ? "Don't have an account? Signup"
-              : "Already have an account? Login"}
-          </button>
+        <div className="flex justify-center items-center h-full w-full flex-col border border-red-600">
+          <div>
+            <h2 className="mb-4 font-semibold text-xl">Login</h2>
+            {login ? <RestaurantLogin /> : <RestaurantSignUp />}
+          </div>
+          <div>
+            <button onClick={() => setLogin(!login)}>
+              {login
+                ? "Don't have an account? Signup"
+                : "Already have an account? Login"}
+            </button>
+          </div>
         </div>
         <Footer />
       </div>
