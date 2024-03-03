@@ -30,5 +30,5 @@ body {
 }
 
 .submit-btn {
-  @apply w-full bg-yellow-500 hover:bg-[#ecf400e5] transition-colors text-black border-none px-4 py-2 rounded cursor-pointer my-[1rem] text-base font-semibold;
+  @apply w-full bg-yellow-500 hover:bg-yellow-600 transition-colors text-black border-none px-4 py-2 rounded cursor-pointer my-[1rem] text-base font-semibold;
 }

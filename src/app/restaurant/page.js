@@ -12,13 +12,12 @@ const page = () => {
     <section className="">
       <div>
         <RestaurantHeader />
-
-        <div className="flex justify-center items-center h-full w-full flex-col border border-red-600">
+        <div>
           <div>
-            <h2 className="mb-4 font-semibold text-xl">Login</h2>
+            {/* <h2 className="mb-4 font-semibold text-xl">Login</h2> */}
             {login ? <RestaurantLogin /> : <RestaurantSignUp />}
           </div>
-          <div>
+          <div className="flex items-center justify-center text-lg">
             <button onClick={() => setLogin(!login)}>
               {login
                 ? "Don't have an account? Signup"

@@ -1,9 +1,9 @@
 const RestaurantLogin = () => {
   return (
-    <section className="w-full sm:max-w-md 2xl:max-w-xl flex flex-col items-center justify-center mx-auto px-4">
+    <section className="w-[80vw] sm:max-w-md 2xl:max-w-xl flex flex-col items-center justify-center mx-auto px-4 h-full">
       {/* <h4>Login</h4> */}
       <div className="w-full">
-        <div>
+        <div className="mb-2">
           <input type="text" placeholder="Email" className="input-field" />
         </div>
         <div>
