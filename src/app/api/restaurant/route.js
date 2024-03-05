@@ -1,13 +1,11 @@
-import { connectDB } from "@/app/lib/db";
+import connectDB from "@/config/db";
 import { Restaurant } from "@/models/restaurantsModel";
 import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    await mongoose.connect(connectDB);
-    console.log("Connected to MongoDB");
-
+    await connectDB();
     const data = await Restaurant.find();
     console.log("Fetched restaurant data:", data);
 
@@ -21,8 +19,7 @@ export async function GET() {
 export async function POST(req) {
   const { email, password, name, city, address, contact } = await req.json();
   try {
-    await mongoose.connect(connectDB);
-    console.log("Connected to MongoDB");
+    await connectDB();
     const newRestaurant = new Restaurant({
       name,
       email,
