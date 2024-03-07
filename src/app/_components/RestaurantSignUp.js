@@ -1,6 +1,7 @@
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const RestaurantSignUp = () => {
   const [email, setEmail] = useState("");
@@ -10,6 +11,8 @@ const RestaurantSignUp = () => {
   const [city, setCity] = useState("");
   const [address, setAddress] = useState("");
   const [contact, setContact] = useState("");
+
+  const router = useRouter();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -43,6 +46,7 @@ const RestaurantSignUp = () => {
         toast.success("successfully registred!");
       }
       localStorage.setItem("restaurantInfo", JSON.stringify(data));
+      router.push("/restaurant/dashboard");
     } catch (error) {
       console.error("Error:", error);
       toast.error(error?.message);
