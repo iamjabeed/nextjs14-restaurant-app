@@ -1,3 +1,5 @@
+import axios from "axios";
+import toast from "react-hot-toast";
 import { useState } from "react";
 
 const RestaurantSignUp = () => {
@@ -11,24 +13,46 @@ const RestaurantSignUp = () => {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    console.log(email, password, confirmPassword, name, city, address, contact);
+    if (password != confirmPassword) {
+      toast.error("password do not matched");
+      return;
+    } else if (password.length < 4) {
+      toast.error("password should be atleast 5 characters");
+      return;
+    } else if (
+      !email ||
+      !password ||
+      !confirmPassword ||
+      !name ||
+      !city ||
+      !address ||
+      !contact
+    ) {
+      toast.error("please fill all the input fields");
+      return;
+    }
 
-    const result = await fetch("http://localhost:3000/api/restaurant", {
-      method: "POST",
-      body: JSON.stringify({ email, password, name, city, address, contact }),
-    });
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/restaurant",
+        { email, password, name, city, address, contact }
+      );
 
-    const data = await result.json();
-    console.log(data);
-    if (result.success) {
-      alert("Restaurant Registered successfully");
+      const data = response?.data?.result;
+      if (data) {
+        toast.success("successfully registred!");
+      }
+      localStorage.setItem("restaurantInfo", JSON.stringify(data));
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error(error?.message);
     }
 
     setEmail("");
     setPassword("");
     setConfirmPassword("");
     setName("");
-    setCity(" ");
+    setCity("");
     setAddress("");
     setContact("");
   };
