@@ -1,3 +1,5 @@
+"use client";
+
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useState } from "react";
@@ -15,7 +17,6 @@ const RestaurantSignUp = () => {
   const router = useRouter();
 
   const handleSignUp = async (e) => {
-    e.preventDefault();
     if (password != confirmPassword) {
       toast.error("password do not matched");
       return;
@@ -36,10 +37,14 @@ const RestaurantSignUp = () => {
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/restaurant",
-        { email, password, name, city, address, contact }
-      );
+      const response = await axios.post("http://localhost:3000/api/signup", {
+        email,
+        password,
+        name,
+        city,
+        address,
+        contact,
+      });
 
       const data = response?.data?.result;
       if (data) {

@@ -16,7 +16,7 @@ export async function GET() {
     return NextResponse.error("Internal Server Error");
   }
 }
-
+//* SIGNUP
 export async function POST(req) {
   const { email, password, name, city, address, contact } = await req.json();
   await connectDB();

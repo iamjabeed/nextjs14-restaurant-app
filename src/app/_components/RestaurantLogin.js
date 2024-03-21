@@ -1,15 +1,39 @@
 "use client";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const RestaurantLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = async (e) => {
-    console.log(email, password);
+  const router = useRouter();
 
-    setEmail(" ");
-    setPassword(" ");
+  const handleLogin = async (e) => {
+    if (!email || !password) {
+      toast.error("please fill all the input fields");
+      return;
+    }
+    try {
+      const response = await axios.post("/api/login", {
+        email,
+        password,
+      });
+
+      // console.log(response);
+      const data = response?.data?.result;
+      if (data) {
+        toast.success("successfully Login!");
+      }
+      localStorage.setItem("restaurantInfo", JSON.stringify(data));
+      router.push("/restaurant/dashboard");
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error(error?.message);
+    }
+    setEmail("");
+    setPassword("");
   };
 
   return (
